@@ -137,12 +137,21 @@ class DiscreteVAE(nn.Module):
         dec_init_chan = codebook_dim if not has_resblocks else dec_chans[0]
         dec_chans = [dec_init_chan, *dec_chans]
 
+        print("Enc chains:", enc_chains)
+
         enc_chans_io, dec_chans_io = map(lambda t: list(zip(t[:-1], t[1:])), (enc_chans, dec_chans))
+
+        print("Enc chains io:", enc_chans_io)
+        print("Decoder chains io:", dec_chans_io)
 
         enc_layers = []
         dec_layers = []
 
         for (enc_in, enc_out), (dec_in, dec_out) in zip(enc_chans_io, dec_chans_io):
+            print("Enc in:", enc_in)
+            print("Enc out:", enc_out)
+            print("Dec in:", dec_in)
+            print("Dec out:", dec_out)
             enc_layers.append(nn.Sequential(nn.Conv2d(enc_in, enc_out, 4, stride = 2, padding = 1), nn.ReLU()))
             dec_layers.append(nn.Sequential(nn.ConvTranspose2d(dec_in, dec_out, 4, stride = 2, padding = 1), nn.ReLU()))
 

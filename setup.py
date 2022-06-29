@@ -29,7 +29,7 @@ setup(
     'rotary-embedding-torch',
     'taming-transformers-rom1504',
     'tokenizers',
-    'torch>=1.6',
+    'torch>=1.11,<1.12',
     'torchvision',
     'transformers',
     'tqdm',
